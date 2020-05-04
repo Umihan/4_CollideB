@@ -70,5 +70,22 @@ namespace ConsoleApplication1
 
             }
         }
+
+        static bool SaveConfig(ref int Anzahl)
+        {
+            var path = @"D:\GIT\CollideB\4_CollideB\config.ini";
+            string text = Convert.ToString(Anzahl);
+            File.WriteAllText(path, text);
+
+            if (File.Exists(path))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }
