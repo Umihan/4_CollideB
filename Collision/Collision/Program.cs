@@ -87,5 +87,27 @@ namespace ConsoleApplication1
             }
 
         }
+
+        static bool LoadConfig(ref int Anzahl)
+        {
+            var path = @"D:\GIT\CollideB\4_CollideB\config.ini";
+
+            string Rueckgabe = File.ReadAllText(path);
+            int ueberpruefung = Convert.ToInt32(Rueckgabe);
+
+            Anzahl = ueberpruefung;
+
+            if (File.Exists(path) & ueberpruefung > 0)
+            {
+                Anzahl = ueberpruefung;
+                return true;
+            }
+            else
+            {
+                Anzahl = 0;
+                return false;
+            }
+        }
+
     }
 }
