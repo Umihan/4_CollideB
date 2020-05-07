@@ -49,6 +49,7 @@ namespace ConsoleApplication1
                 Console.ForegroundColor = ConsoleColor.Red;                 //Ändert die Farbe auf rot
                 Console.Write("K");                                         //Schreibt an dieser Position ein "K" raus
                 Console.ResetColor();                                       //Farbe zurücksetzen
+                Move();
             }
             //Öffentliche Methoden
             public void Move()
