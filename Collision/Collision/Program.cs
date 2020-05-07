@@ -45,20 +45,24 @@ namespace ConsoleApplication1
             {
             }
 
-            
 
 
-           
+
+
 
         }
+        // enthält den Pfad der config.ini Datei, Achtung der Dateipfad muss angepasst werden!!!!
+        static string DateiPfad = @"C:\Users\Isaak\Desktop\4_ CollideB\Collision\";
+        static string DateiName = "config.ini";
+        static string VollstaendigerPfad = DateiPfad + DateiName;
 
         static void Main(string[] args)
         {
-            Console.WindowWidth = seite*2;
+            Console.WindowWidth = seite * 2;
             Console.WindowHeight = seite;
             Console.Clear();
             Random ZG = new Random();
-            int Anzahl=ZG.Next(1,6);
+            int Anzahl = ZG.Next(1, 6);
             einer[] meineEiner = new einer[Anzahl];
             for (int i = 0; i < Anzahl; i++)
             {
@@ -75,28 +79,23 @@ namespace ConsoleApplication1
 
             }
             SaveConfig(Anzahl);
+            LoadConfig(ref Anzahl);
         }
-        // enthält den Pfad der congig.ini Datei;
-        static string VollstaendigerPfad;   
+                       
 
         //Hier wird die Standard-Konfigurationsdatei config.ini erstellt oder geändert und die Anzahl
         //eingetragen. Sollte die Datei nicht erstellt werden können, wird ein Rückgabewert false retourniert.
         //Ansonsten ist der Rückgabewert true.
         static bool SaveConfig(int Anzahl)
-        {           
+        {
             bool confErstellt;
-
-            //gibt den Dateipfad und Namen der config.ini Datei an
-            string DateiPfad = @"C:\Users\Isaak\Desktop\4_ CollideB\Collision\";
-            string DateiName = "config.ini";
-            VollstaendigerPfad = DateiPfad + DateiName;
-
-            //Erstellt und beschreibt die config.ini Datei
-            using(StreamWriter sw = new StreamWriter(VollstaendigerPfad))
-            {
-                sw.WriteLine("Anzahl;{0}", Anzahl);
-            }
            
+            //Erstellt und beschreibt die config.ini Datei
+            using (StreamWriter sw = new StreamWriter(VollstaendigerPfad))
+            {
+                sw.WriteLine("{0};", Anzahl);
+            }
+
             //Kontrolliert ob die config.ini Datei erstellt wurde
             confErstellt = File.Exists(VollstaendigerPfad);
 
@@ -108,8 +107,45 @@ namespace ConsoleApplication1
         //ein Rückgabewert false retourniert. Ansonsten ist der Rückgabewert true.
         static bool LoadConfig(ref int Anzahl)
         {
-            bool confGelesen= true;
+            bool confGelesen = true;
 
+            //Alles was in der config.ini steht
+            string config = "";
+            //wird benötigt um die config.ini Datei Zeile für Zeile auszulesen
+            string line = "";
+
+            //Kontrolliert ob es die Config Datei gibt
+            if (File.Exists(VollstaendigerPfad))
+            {
+                //Liest die config.ini aus und speichert es in config
+                using (StreamReader sr = new StreamReader(VollstaendigerPfad))
+                {
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        config += line;
+                    }
+                }
+                //splitet den Inhalt der config.ini bei';'
+                string[] ArraySplitConfig = config.Split(';');
+
+                //Kontrolliert ob etwas geschrieben wurde
+                if (ArraySplitConfig[0] != "")
+                {
+                    Anzahl = Convert.ToInt16(ArraySplitConfig[0]);
+                }
+
+                else
+                {
+                    Anzahl = 0;
+                    confGelesen = false;
+                }
+
+            }
+            else
+            {
+                Anzahl = 0;
+                confGelesen = false;
+            }
             return confGelesen;
         }
     }
