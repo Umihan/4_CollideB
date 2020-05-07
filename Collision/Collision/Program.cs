@@ -7,7 +7,7 @@ using System.IO;
  *  Collide
  *  Eine Simulation im 2-dimensionalen Raum
  * 
- * 
+ * c) Julian Mazohl
  * 
  * 2020 TFO-Meran
  */
@@ -33,12 +33,22 @@ namespace ConsoleApplication1
             //Private Methoden
             void show()
             {
+                Console.SetCursorPosition(posx,posy);                       //Setzt den Cursor auf Position X,Y
+                Console.ForegroundColor = ConsoleColor.Green;               //Ändert die Farbe auf grün
+                Console.Write("©");                                         //Zechnet ein Objekt
+                Console.ResetColor();                                       //Farbe zurücksetzen
             }
             void hide()
             {
+                Console.SetCursorPosition(posx, posy);                      //Setzt den Cursor auf Position X,Y
+                Console.Write(" ");                                         //Hier wird das Objekt an der aktuellen Position gelöscht
             }
             void collide()
             {
+                Console.SetCursorPosition(posx, posy);                      //Setzt den Cursor auf Position X,Y wenn eine Kollision entdeckt wird
+                Console.ForegroundColor = ConsoleColor.Red;                 //Ändert die Farbe auf rot
+                Console.Write("K");                                         //Schreibt an dieser Position ein "K" raus
+                Console.ResetColor();                                       //Farbe zurücksetzen
             }
             //Öffentliche Methoden
             public void Move()
