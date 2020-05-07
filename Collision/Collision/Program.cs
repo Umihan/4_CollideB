@@ -45,6 +45,11 @@ namespace ConsoleApplication1
             {
             }
 
+            
+
+
+           
+
         }
 
         static void Main(string[] args)
@@ -69,6 +74,43 @@ namespace ConsoleApplication1
                 System.Threading.Thread.Sleep(10);
 
             }
+            SaveConfig(Anzahl);
+        }
+        // enthält den Pfad der congig.ini Datei;
+        static string VollstaendigerPfad;   
+
+        //Hier wird die Standard-Konfigurationsdatei config.ini erstellt oder geändert und die Anzahl
+        //eingetragen. Sollte die Datei nicht erstellt werden können, wird ein Rückgabewert false retourniert.
+        //Ansonsten ist der Rückgabewert true.
+        static bool SaveConfig(int Anzahl)
+        {           
+            bool confErstellt;
+
+            //gibt den Dateipfad und Namen der config.ini Datei an
+            string DateiPfad = @"C:\Users\Isaak\Desktop\4_ CollideB\Collision\";
+            string DateiName = "config.ini";
+            VollstaendigerPfad = DateiPfad + DateiName;
+
+            //Erstellt und beschreibt die config.ini Datei
+            using(StreamWriter sw = new StreamWriter(VollstaendigerPfad))
+            {
+                sw.WriteLine("Anzahl;{0}", Anzahl);
+            }
+           
+            //Kontrolliert ob die config.ini Datei erstellt wurde
+            confErstellt = File.Exists(VollstaendigerPfad);
+
+            return confErstellt;
+        }
+
+        //Hier wird die Standard-Konfigurationsdatei config.ini ausgelesen und die Anzahl zurückgegeben.
+        //Sollte die Datei nicht existieren oder keine Anzahl enthalten, wird in Anzahl der Wert 0 und 
+        //ein Rückgabewert false retourniert. Ansonsten ist der Rückgabewert true.
+        static bool LoadConfig(ref int Anzahl)
+        {
+            bool confGelesen= true;
+
+            return confGelesen;
         }
     }
 }
