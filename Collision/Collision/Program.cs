@@ -6,7 +6,7 @@ using System.IO;
 /*
  *  Collide
  *  Eine Simulation im 2-dimensionalen Raum
- * 
+ *  Es muss der Dateipfad von der config.ini angepasst werden
  * 
  * 
  * 2020 TFO-Meran
@@ -18,6 +18,11 @@ namespace ConsoleApplication1
     {
         const int seite = 50;
         static int[,] feld = new int[seite, seite];
+
+        // enthält den Pfad der config.ini Datei, Achtung der Dateipfad muss angepasst werden!!!!
+        static string DateiPfad = @"C:\Users\Isaak\Desktop\4_ CollideB\Collision\";
+        static string DateiName = "config.ini";
+        static string VollstaendigerPfad = DateiPfad + DateiName;
 
         class einer
         {
@@ -51,10 +56,7 @@ namespace ConsoleApplication1
 
 
         }
-        // enthält den Pfad der config.ini Datei, Achtung der Dateipfad muss angepasst werden!!!!
-        static string DateiPfad = @"C:\Users\Isaak\Desktop\4_ CollideB\Collision\";
-        static string DateiName = "config.ini";
-        static string VollstaendigerPfad = DateiPfad + DateiName;
+        
 
         static void Main(string[] args)
         {
@@ -78,6 +80,7 @@ namespace ConsoleApplication1
                 System.Threading.Thread.Sleep(10);
 
             }
+
             SaveConfig(Anzahl);
             LoadConfig(ref Anzahl);
         }
